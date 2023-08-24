@@ -2,7 +2,7 @@
 
 Welcome to the Tic-Tac-Toe game repository! This project is a simple implementation of the classic Tic-Tac-Toe game using HTML, CSS, and JavaScript.
 
-![Capture](https://github.com/Wambui-N/tic-tac-toe/assets/100346121/89ba0493-c67b-4c46-9ca5-510f4015aa08)
+![Capture](https://github.com/Wambui-N/tic-tac-toe/assets/100346121/f880dd91-12c9-4422-ac85-8a838590344a)
 
 ## Features
 
