@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-slate-100">
+    <div class="flex justify-center">
+      <div
+        class="mb-4 inline-flex gap-2 justify-self-center hidden absolute rounded-lg bg-slate-700 px-6 py-2 mt-2 text-base text-slate-100"
+        role="alert"
+        id="alert"
+      >
+        <span class="mr-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-5 w-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+        <p id="alert-text"></p>
+      </div>
+    </div>
+    <div class="flex gap-12 justify-center">
+      <div class="justify-center hidden md:flex items-center h-screen">
+        <div class="max-w-lg mx-auto">
+          <div
+            class="rounded-lg bg-slate-400 text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+          >
+            <div
+              id="player1"
+              class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <h1
+                class="mb-2 mt-0 text-2xl text-slate-100 font-medium leading-tight"
+              >
+                Player X
+              </h1>
+              <p class="turn h-8 text-slate-100 font-medium text-base"></p>
+            </div>
+            <div
+              id="player"
+              class="result flex justify-around border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <h1
+                id="player2"
+                class="mb-2 mt-0 text-2xl text-slate-100 font-medium leading-tight"
+              >
+                X
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center items-center h-screen">
+        <div class="max-w-lg mx-auto">
+          <div
+            class="rounded-lg bg-slate-400 text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+          >
+            <div
+              class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <h1
+                class="mb-2 mt-0 text-3xl font-semibold text-slate-100 leading-tight"
+              >
+                Tic-Tac-Toe
+              </h1>
+            </div>
+            <div class="p-12">
+              <div class="board grid grid-cols-3 gap-4">
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="0"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="1"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="2"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="3"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="4"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="5"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="6"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="7"
+                ></button>
+                <button
+                  type="button"
+                  class="cell w-[4rem] h-[4rem] text-xl bg-slate-100 rounded-lg drop-shadow-lg active:filter-none text-slate-900 font-medium"
+                  id="8"
+                ></button>
+              </div>
+            </div>
+            <div
+              class="result flex justify-around border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <button
+                id="reset"
+                type="button"
+                class="inline-block rounded bg-slate-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-slate-400 drop-shadow-lg active:filter-none transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                data-te-ripple-init
+                data-te-ripple-color="light"
+              >
+                RESET
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="justify-center hidden md:flex items-center h-screen">
+        <div class="max-w-lg mx-auto">
+          <div
+            class="rounded-lg bg-slate-400 text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+          >
+            <div
+              id="player"
+              class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <h1
+                class="mb-2 mt-0 text-2xl text-slate-100 font-medium leading-tight"
+              >
+                Player O
+              </h1>
+              <p class="turn h-8 text-slate-100 font-medium text-base"></p>
+            </div>
+            <div
+              class="result flex justify-around border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
+            >
+              <h1
+                id="player2"
+                class="mb-2 mt-0 text-2xl text-slate-100 font-medium leading-tight"
+              >
+                O
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
