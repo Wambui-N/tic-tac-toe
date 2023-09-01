@@ -74,13 +74,14 @@ const checkWinner = (filled) => {
       ) {
         highlightCells(cell);
         stopClicking();
+        winner = cell.a.innerHTML;
         const alert = document.getElementById("alert");
         alert.classList.replace("hidden", "visible");
         const alertText = document.getElementById("alert-text");
         alertText.innerHTML = `Player ${cell.a.innerHTML} won!`;
       }
     }
-    if (filled.length == 9) {
+    if (filled.length == 9 && winner == null) {
       const alert = document.getElementById("alert");
       alert.classList.replace("hidden", "visible");
       const alertText = document.getElementById("alert-text");
