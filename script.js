@@ -78,10 +78,6 @@ const checkWinner = (filled) => {
         alert.classList.replace("hidden", "visible");
         const alertText = document.getElementById("alert-text");
         alertText.innerHTML = `Player ${cell.a.innerHTML} won!`;
-        // setTimeout(() => {
-        //   alert.classList.replace("visible", "hidden");
-        //   alertText.innerHTML = "";
-        // }, 2000);
       }
     }
     if (filled.length == 9) {
@@ -94,7 +90,6 @@ const checkWinner = (filled) => {
         alertText.innerHTML = "";
         reload();
       }, 1000);
-      //clearCells();
     }
   }
 };
