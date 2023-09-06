@@ -27,12 +27,17 @@ const winningConditions = [
 
 //clearing the board
 function clearCells() {
+  //reset the board without reloading the page
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
-    cell.innerHTML = ""; // Clear the content of each cell
+    cell.innerHTML = "";
+    cell.classList.replace("bg-slate-900", "bg-slate-100");
+    cell.classList.replace("text-slate-100", "text-slate-900");
+    cell.addEventListener("click", cellClicked);
+    // reset to player 1
+    currentPlayer = player1;
+    playerTurn();
   });
-  filled = [];
-  currentPlayer = player1;
 }
 
 //highlighting the winning cells
@@ -79,6 +84,11 @@ const checkWinner = (filled) => {
         alert.classList.replace("hidden", "visible");
         const alertText = document.getElementById("alert-text");
         alertText.innerHTML = `Player ${cell.a.innerHTML} won!`;
+        setTimeout(()=>{
+          alert.classList.replace("visible", "hidden");
+          alertText.innerHTML = "";
+          clearCells();
+        }, 1000)
       }
     }
     if (filled.length == 9 && winner == null) {
@@ -89,20 +99,20 @@ const checkWinner = (filled) => {
       setTimeout(() => {
         alert.classList.replace("visible", "hidden");
         alertText.innerHTML = "";
-        reload();
+        clearCells();
       }, 1000);
     }
   }
 };
 
 //reload
-const reload = () => {
-  location.reload();
-};
+// const reload = () => {
+//   location.reload();
+// };
 
 //reset button
 const resetButton = document.getElementById("reset");
-resetButton.addEventListener("click", reload);
+resetButton.addEventListener("click", clearCells);
 
 
 //filling the board
