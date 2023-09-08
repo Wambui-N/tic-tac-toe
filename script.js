@@ -3,10 +3,9 @@ const player2 = "O";
 let currentPlayer = player1;
 const turn = document.getElementsByClassName("turn");
 turn[0].innerHTML = "Your turn"; //first player
-score = null;
+score = 0;
 id = null;
 filled = [];
-score = 0;
 
 //turn taking
 const playerTurn = () => {
@@ -159,6 +158,103 @@ function cellClicked(e) {
   playerTurn();
 }
 
+//player 2
+//best move
+function bestMoveRow() {
+  let bestScore = -Infinity;
+  let worstScore = Infinity;
+  let bestMoveIndex = -1;
+  let worstMoveIndex = -1;
+
+  for (let i = 0; i < winningConditions.length; i++) {
+    const [a, b, c] = winningConditions[i];
+    const cell = {
+      a: document.getElementById(a),
+      b: document.getElementById(b),
+      c: document.getElementById(c),
+    };
+    const cellsToCheck = [cell.a, cell.b, cell.c];
+    const rowScore = [];
+
+    cellsToCheck.forEach((cellToCheck) => {
+      if (cellToCheck.innerHTML == player1) {
+        rowScore.push(-1);
+      } else if (cellToCheck.innerHTML == player2) {
+        rowScore.push(1);
+      }
+    });
+
+    // Calculate the sum of rowScore
+    const sum = rowScore.reduce((acc, curr) => acc + curr, 0);
+
+    if (sum > bestScore) {
+      bestScore = sum;
+      bestMoveIndex = i;
+    }
+
+    if (sum < worstScore) {
+      worstScore = sum;
+      worstMoveIndex = i;
+    }
+  }
+
+  // Return both bestScore and worstScore in an object
+  return { bestScore, worstScore };
+}
+
+//player 2 filling the board
+function player2Move() {
+  const { bestScore, worstScore } = bestMoveRow();  //if two cells are filled, fill the third
+  if (
+    (cell.a.innerHTML == player2 &&
+      cell.b.innerHTML == player2 &&
+      cell.c.innerHTML == " ") ||
+    (cell.a.innerHTML == player2 &&
+      cell.c.innerHTML == player2 &&
+      cell.b.innerHTML == " ") ||
+    (cell.b.innerHTML == player2 &&
+      cell.c.innerHTML == player2 &&
+      cell.a.innerHTML == " ")
+  ) {
+    const [a, b, c] = winningConditions[bestMoveIndex];
+    const cell = {
+      a: document.getElementById(a),
+      b: document.getElementById(b),
+      c: document.getElementById(c),
+    };
+    if (cell.a.innerHTML == " ") {
+      cell.a.innerHTML = player2;
+      filled.push(cell.a.id);
+    } else if (cell.b.innerHTML == " ") {
+      cell.b.innerHTML = player2;
+      filled.push(cell.b.id);
+    } else if (cell.c.innerHTML == " ") {
+      cell.c.innerHTML = player2;
+      filled.push(cell.c.id);
+    }
+  } else{
+    const [a, b, c] = winningConditions[worstMoveIndex];
+    const cell = {
+      a: document.getElementById(a),
+      b: document.getElementById(b),
+      c: document.getElementById(c),
+    };
+    if (cell.a.innerHTML == " ") {
+      cell.a.innerHTML = player2;
+      filled.push(cell.a.id);
+    } else if (cell.b.innerHTML == " ") {
+      cell.b.innerHTML = player2;
+      filled.push(cell.b.id);
+    } else if (cell.c.innerHTML == " ") {
+      cell.c.innerHTML = player2;
+      filled.push(cell.c.id);
+    }
+  }
+
+  checkWinner(filled);
+  playerTurn();
+}
+
 // function minimax(depth, isMaximizing) {
 //   if (score === 10 || score === -10 || filled.length == 9 ) {
 //     return score;
@@ -199,36 +295,3 @@ function cellClicked(e) {
 //   }
 //   return score;
 // }
-
-//player 2
-//best move
-function bestMove() {
-  let bestScore = -Infinity;
-  let bestMoveIndex = -1;
-
-  for (let i = 0; i < winningConditions.length; i++) {
-    if (filled.length < 3) {
-      break;
-    }
-    const [a, b, c] = winningConditions[i];
-    const cell = {
-      a: document.getElementById(a),
-      b: document.getElementById(b),
-      c: document.getElementById(c),
-    };
-    const cellsToCheck = [cell.a, cell.b, cell.c];
-    cellsToCheck.forEach((cellToCheck) => {
-      if (cellToCheck.innerHTML == player1) {
-        rowScore -= 1;
-      } else if (cellToCheck.innerHTML == player2) {
-        rowScore += 1;
-      }
-      // Calculate the rowScore based on the contents of the cells
-    });
-    if (rowScore > bestScore) {
-      bestScore = rowScore;
-      bestMoveIndex = i;
-    }
-    rowScore = 0;
-  }
-}
