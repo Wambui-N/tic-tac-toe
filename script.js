@@ -25,9 +25,6 @@ const winningConditions = [
   [2, 4, 6], //diagonals
 ];
 
-//score of different rows
-const rowScore = [];
-
 //clearing the board
 function clearCells() {
   //reset the board without reloading the page
@@ -63,28 +60,12 @@ const stopClicking = () => {
   });
 };
 
-//evaluate the board for the minimax algorithm
-function evaluateBoard(winner) {
-  // Check if the AI has won
-  if (winner === player2) {
-    score = 10;
-    return score;
-  }
-  // Check if the player has won
-  if (winner === player1) {
-    score = -10;
-    return score;
-  }
-  // It's a draw
-  return 0;
-}
-
 //checking for winner
 const checkWinner = (filled) => {
   let winner = null;
   for (let i = 0; i < winningConditions.length; i++) {
     const [a, b, c] = winningConditions[i];
-    if (filled.length < 3) {
+    if (filled.length < 5) {
       break;
     }
     if ([a, b, c].every((val) => filled.includes(val))) {
@@ -157,141 +138,3 @@ function cellClicked(e) {
   checkWinner(filled);
   playerTurn();
 }
-
-//player 2
-//best move
-function bestMoveRow() {
-  let bestScore = -Infinity;
-  let worstScore = Infinity;
-  let bestMoveIndex = -1;
-  let worstMoveIndex = -1;
-
-  for (let i = 0; i < winningConditions.length; i++) {
-    const [a, b, c] = winningConditions[i];
-    const cell = {
-      a: document.getElementById(a),
-      b: document.getElementById(b),
-      c: document.getElementById(c),
-    };
-    const cellsToCheck = [cell.a, cell.b, cell.c];
-    const rowScore = [];
-
-    cellsToCheck.forEach((cellToCheck) => {
-      if (cellToCheck.innerHTML == player1) {
-        rowScore.push(-1);
-      } else if (cellToCheck.innerHTML == player2) {
-        rowScore.push(1);
-      }
-    });
-
-    // Calculate the sum of rowScore
-    const sum = rowScore.reduce((acc, curr) => acc + curr, 0);
-
-    if (sum > bestScore) {
-      bestScore = sum;
-      bestMoveIndex = i;
-    }
-
-    if (sum < worstScore) {
-      worstScore = sum;
-      worstMoveIndex = i;
-    }
-  }
-
-  // Return both bestScore and worstScore in an object
-  return { bestScore, worstScore };
-}
-
-//player 2 filling the board
-function player2Move() {
-  const { bestScore, worstScore } = bestMoveRow();  //if two cells are filled, fill the third
-  if (
-    (cell.a.innerHTML == player2 &&
-      cell.b.innerHTML == player2 &&
-      cell.c.innerHTML == " ") ||
-    (cell.a.innerHTML == player2 &&
-      cell.c.innerHTML == player2 &&
-      cell.b.innerHTML == " ") ||
-    (cell.b.innerHTML == player2 &&
-      cell.c.innerHTML == player2 &&
-      cell.a.innerHTML == " ")
-  ) {
-    const [a, b, c] = winningConditions[bestMoveIndex];
-    const cell = {
-      a: document.getElementById(a),
-      b: document.getElementById(b),
-      c: document.getElementById(c),
-    };
-    if (cell.a.innerHTML == " ") {
-      cell.a.innerHTML = player2;
-      filled.push(cell.a.id);
-    } else if (cell.b.innerHTML == " ") {
-      cell.b.innerHTML = player2;
-      filled.push(cell.b.id);
-    } else if (cell.c.innerHTML == " ") {
-      cell.c.innerHTML = player2;
-      filled.push(cell.c.id);
-    }
-  } else{
-    const [a, b, c] = winningConditions[worstMoveIndex];
-    const cell = {
-      a: document.getElementById(a),
-      b: document.getElementById(b),
-      c: document.getElementById(c),
-    };
-    if (cell.a.innerHTML == " ") {
-      cell.a.innerHTML = player2;
-      filled.push(cell.a.id);
-    } else if (cell.b.innerHTML == " ") {
-      cell.b.innerHTML = player2;
-      filled.push(cell.b.id);
-    } else if (cell.c.innerHTML == " ") {
-      cell.c.innerHTML = player2;
-      filled.push(cell.c.id);
-    }
-  }
-
-  checkWinner(filled);
-  playerTurn();
-}
-
-// function minimax(depth, isMaximizing) {
-//   if (score === 10 || score === -10 || filled.length == 9 ) {
-//     return score;
-//   }
-
-//   if (isMaximizing) {
-//     let bestScore = -Infinity;
-//     for (let i = 1; i < filled.length; i++) {
-//       if (currentPlayer === player1) {
-//         currentPlayer = player2;
-//         //filled[i] = player2;
-//         bestScore = Math.max(bestScore, minimax(filled, depth + 1, false));
-//         filled[i] = "";
-//       }
-//     }
-//     return bestScore;
-//   } else {
-//     let bestScore = Infinity;
-//     for (let i = 0; i < board.length; i++) {
-//       if (board[i] === "") {
-//         board[i] = player1;
-//         bestScore = Math.min(bestScore, minimax(board, depth + 1, true));
-//         board[i] = "";
-//       }
-//     }
-//     return bestScore;
-//   }
-// }
-
-//score the board
-// function scoreBoard() {
-//   for (let i = 0; i < filled.length; i++) {
-//     if (filled[i] === player1) {
-//       score -= 1;
-//     } else if (filled[i] === player2) {
-//       score += 1;
-//     }
-//   }
-//   return score;
-// }
