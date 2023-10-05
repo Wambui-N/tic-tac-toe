@@ -20,6 +20,34 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-slate-100">
+
+    <!-- Modal -->
+    <!-- <button id="myBtn">Open Modal</button> -->
+
+    <div id="myModal" class="modal hidden fixed z-10 w-[100%] h-[100%] bg-slate-950 opacity-95">
+      <div class="modal-content flex flex-col items-center gap-4 md:gap-12 bg-slate-300 mx-[15%] my-[40%] md:my-[10%] p-12 border-2 border-slate-700 w-[70%]">
+        <p class="uppercase text-slate-800 font-bold text-lg md:text-3xl">Choose Game Mode</p>
+        <div class="flex flex-col md:flex-row gap-8 md:gap-24 justify-around">
+          <span id="cpu" class="close bg-slate-800 hover:bg-slate-950 hover:drop-shadow-md float-right px-12 py-4 rounded-lg font-semibold text-lg cursor-pointer ">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#cbd5e1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+          </span>
+          <span id="opponent" class="close bg-slate-800 hover:bg-slate-950 hover:drop-shadow-md float-right px-12 py-4 rounded-lg font-semibold text-lg cursor-pointer ">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#cbd5e1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+              <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
     <div class="flex justify-center">
       <div
         class="mb-4 inline-flex gap-2 justify-self-center hidden absolute rounded-lg bg-slate-700 px-6 py-2 mt-2 text-base text-slate-100"
