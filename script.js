@@ -4,9 +4,9 @@ const player2 = "O";
 let currentPlayer = player1;
 const turn = document.getElementsByClassName("turn");
 turn[0].innerHTML = "Your turn"; //first player
-score = 0;
-id = null;
-filled = [];
+let score = 0;
+let id = null;
+let filled = [];
 
 closeModal = () => {
     const modal = document.getElementById("myModal");
@@ -147,6 +147,7 @@ function startGameWithOpponent() {
   cells.forEach((cell) => cell.addEventListener("click", cellClicked));
 
   function cellClicked(e) {
+    console.log(id, filled, currentPlayer)
     id = e.target.id;
     if (!filled.includes(parseInt(id))) {
       filled.push(parseInt(id));
